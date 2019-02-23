@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 3009, host: 3009
   config.vm.network "forwarded_port", guest: 3010, host: 3010
 
-  config.vm.provider "virtualbox" do |vb| 
+  config.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
     vb.memory = "8192"
 
@@ -40,12 +40,14 @@ Vagrant.configure("2") do |config|
 
     # Video Memory
     vb.customize ["modifyvm", :id, "--vram", "128"]
+
+    vb.name = "Development-ubuntu"
   end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     sudo apt-get update
     sudo apt-get install -y curl
-    
+
     sudo apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
     sudo VBoxClient --clipboard
     sudo VBoxClient --draganddrop
@@ -59,14 +61,16 @@ Vagrant.configure("2") do |config|
 
     sudo wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    sudo apt install code
+    sudo apt install -y code
     code --install-extension ms-vsliveshare.vsliveshare
     code --install-extension equinusocio.vsc-material-theme
     code --install-extension dbaeumer.vscode-eslint
     code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-    
+    wget -oq- https://raw.githubusercontent.com/rsferreira11/vscode-settings/master/settings.json -P /home/vagrant/.config/Code/User/
+
     sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-    command -v nvm
+    echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
+    source /home/vagrant/.profile
     nvm install 6.10
   SHELL
 end
