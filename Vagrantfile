@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -15,8 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
 
   # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # within the machine from a port on the host machine.
   # NOTE: This will enable public access to the opened port
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "forwarded_port", guest: 3001, host: 3001
@@ -40,8 +40,6 @@ Vagrant.configure("2") do |config|
 
     # Video Memory
     vb.customize ["modifyvm", :id, "--vram", "128"]
-
-    vb.name = "Development-ubuntu"
   end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
@@ -72,5 +70,8 @@ Vagrant.configure("2") do |config|
     echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
     source /home/vagrant/.profile
     nvm install 6.10
+
+    sudo apt-get install -y gparted
+    mkdir /home/vagrant/games
   SHELL
 end
