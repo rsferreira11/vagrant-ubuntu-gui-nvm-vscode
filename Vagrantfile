@@ -1,4 +1,4 @@
-# Pre installed Noded Version
+# Pre installed Node Version
 NODE_VERSION = "6.10"
 
 # One to One mapping
