@@ -1,5 +1,16 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+# Pre installed Noded Version
+NODE_VERSION = "6.10"
+
+# One to One mapping
+# 3000 means forwarding host 3000 to guest 3000
+OPEN_PORTS = 3000..3010
+
+# Memory in MB
+MEMORY = "8192"
+VIDEO_MEMORY = "128"
+
+# Number of cores
+NUMBER_OF_CPUS = "4"
 
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -18,33 +29,18 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine.
   # NOTE: This will enable public access to the opened port
-  config.vm.network "forwarded_port", guest: 3000, host: 3000
-  config.vm.network "forwarded_port", guest: 3001, host: 3001
-  config.vm.network "forwarded_port", guest: 3002, host: 3002
-  config.vm.network "forwarded_port", guest: 3003, host: 3003
-  config.vm.network "forwarded_port", guest: 3004, host: 3004
-  config.vm.network "forwarded_port", guest: 3005, host: 3005
-  config.vm.network "forwarded_port", guest: 3006, host: 3006
-  config.vm.network "forwarded_port", guest: 3006, host: 3006
-  config.vm.network "forwarded_port", guest: 3007, host: 3007
-  config.vm.network "forwarded_port", guest: 3008, host: 3008
-  config.vm.network "forwarded_port", guest: 3009, host: 3009
-  config.vm.network "forwarded_port", guest: 3010, host: 3010
+  OPEN_PORTS.each do |i|
+    config.vm.network "forwarded_port", guest: i, host: i
+  end
 
   config.vm.provider "virtualbox" do |vb|
-    # Customize the amount of memory on the VM:
-    vb.memory = "8192"
-
-    # Number of CPUs
-    vb.cpus = "4"
-
-    # Video Memory
-    vb.customize ["modifyvm", :id, "--vram", "128"]
+    vb.memory = MEMORY
+    vb.cpus = NUMBER_OF_CPUS
+    vb.customize ["modifyvm", :id, "--vram", VIDEO_MEMORY]
   end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y curl
 
     sudo apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
     sudo VBoxClient --clipboard
@@ -69,7 +65,7 @@ Vagrant.configure("2") do |config|
     sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
     echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
     source /home/vagrant/.profile
-    nvm install 6.10
+    nvm install #{NODE_VERSION}
 
     sudo apt-get install -y gparted
     mkdir /home/vagrant/games
