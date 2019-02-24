@@ -12,6 +12,8 @@ VIDEO_MEMORY = "128"
 # Number of cores
 NUMBER_OF_CPUS = "4"
 
+SHARED_FOLDER_HOST = "C:\\vm_share"
+SHARED_FOLDER_VM = "/home/vagrant/shared"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -25,6 +27,13 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/bionic64"
+
+  config.vm.synced_folder SHARED_FOLDER_HOST, SHARED_FOLDER_VM,
+    create: true,
+    owner: "vagrant",
+    group: "vagrant",
+    :mount_options => ["dmode=777","fmode=666"]
+
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine.
@@ -70,5 +79,6 @@ Vagrant.configure("2") do |config|
 
     sudo apt-get install -y gparted
     mkdir /home/vagrant/games
+    mkdir /home/vagrant/shared
   SHELL
 end
