@@ -10,6 +10,7 @@ It comes with:
 -- ESLint
 -- TSLint
 -- VS Code Material Theme
+- ZSH and oh-my-zsh
 
 ## Dependencies
 - Vagrant
