@@ -37,6 +37,7 @@ Vagrant.configure("2") do |config|
     vb.memory = MEMORY
     vb.cpus = NUMBER_OF_CPUS
     vb.customize ["modifyvm", :id, "--vram", VIDEO_MEMORY]
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
