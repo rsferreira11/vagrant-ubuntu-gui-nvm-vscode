@@ -56,33 +56,33 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     sudo apt-get update
 
-    # sudo apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-    # sudo VBoxClient --clipboard
-    # sudo VBoxClient --draganddrop
-    # sudo VBoxClient --display
-    # sudo VBoxClient --checkhostversion
-    # sudo VBoxClient --seamless
+    sudo apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+    sudo VBoxClient --clipboard
+    sudo VBoxClient --draganddrop
+    sudo VBoxClient --display
+    sudo VBoxClient --checkhostversion
+    sudo VBoxClient --seamless
 
-    # sudo apt-get install -y --no-install-recommends ubuntu-desktop
+    sudo apt-get install -y --no-install-recommends ubuntu-desktop
 
-    # sudo apt-get install -y firefox
+    sudo apt-get install -y firefox
 
-    # sudo wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-    # sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    # sudo apt install -y code
-    # code --install-extension ms-vsliveshare.vsliveshare
-    # code --install-extension equinusocio.vsc-material-theme
-    # code --install-extension dbaeumer.vscode-eslint
-    # code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-    # wget -oq- https://raw.githubusercontent.com/rsferreira11/vscode-settings/master/settings.json -P /home/vagrant/.config/Code/User/
+    sudo wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt install -y code
+    code --install-extension ms-vsliveshare.vsliveshare
+    code --install-extension equinusocio.vsc-material-theme
+    code --install-extension dbaeumer.vscode-eslint
+    code --install-extension ms-vscode.vscode-typescript-tslint-plugin
+    wget -oq- https://raw.githubusercontent.com/rsferreira11/vscode-settings/master/settings.json -P /home/vagrant/.config/Code/User/
 
-    # sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-    # echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
-    # source /home/vagrant/.profile
-    # nvm install #{NODE_VERSION}
+    sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
+    source /home/vagrant/.profile
+    nvm install #{NODE_VERSION}
 
-    # sudo apt-get install -y gparted
-    # mkdir /home/vagrant/games
+    sudo apt-get install -y gparted
+    mkdir /home/vagrant/games
 
     sudo apt install -y zsh
     wget https://raw.githubusercontent.com/rsferreira11/vagrant-ubuntu-gui-nvm-vscode/master/oh-my-zsh-fork.sh -O - | bash
